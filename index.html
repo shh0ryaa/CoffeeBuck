@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CoffeeBuck | Coffee Café in Jalandhar</title>
+    <meta name="description" content="Welcome to CoffeeBuck. Enjoy a cozy café experience with freshly brewed coffee, cold drinks, and a warm atmosphere right here in Jalandhar, Punjab." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D7T7GX0GNV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D7T7GX0GNV');
+    </script>
+
+</head>
+
+<body class="bg-[var(--bg)] text-[var(--text)]">
+    <!-- NAVBAR -->
+    <header class="fixed top-0 w-full bg-white/95 backdrop-blur shadow z-50">
+        <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+            <div class="flex items-center space-x-4">
+                <img src="assets/images/coffebuck_logo.png" alt="Coffebuck Logo" class="w-12 h-12 object-contain">
+                <span class="text-2xl font-semibold text-[var(--brand)]">Coffebuck</span>
+            </div>
+
+            <ul class="hidden md:flex space-x-8 text-lg">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="menu.html" class="nav-link">Menu</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="store-locator.html" class="nav-link">Store Locator</a></li>
+                <li><a href="payment.html" class="nav-link">Payment</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+
+            <!-- Cart (desktop) -->
+            <a href="payment.html" class="hidden md:flex items-center space-x-2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 6h15l-1.5 9h-12L6 6z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <circle cx="10" cy="20" r="1" fill="currentColor" />
+                    <circle cx="18" cy="20" r="1" fill="currentColor" />
+                </svg>
+                <span id="cart-count" class="cart-badge">0</span>
+            </a>
+
+            <div id="user-area" class="ml-4"></div>
+
+            <!-- Mobile toggle -->
+            <button id="nav-toggle" class="md:hidden p-2 rounded-lg focus:outline-none" aria-label="Toggle menu">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
+        </nav>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100">
+            <ul class="flex flex-col px-6 py-4 space-y-3">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="menu.html" class="nav-link">Menu</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="store-locator.html" class="nav-link">Store Locator</a></li>
+                <li><a href="payment.html" class="nav-link">Payment</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="w-full h-screen flex items-center justify-center bg-cover bg-center"
+        style="background-image: url('assets/images/hero_coffee_shop_interior.jpg');">
+        <!-- image needed: hero_coffee_shop_interior.jpg -->
+        <div class="hero-overlay p-10 md:p-12 rounded-2xl text-center max-w-2xl mx-auto">
+            <h1 class="text-white text-4xl md:text-5xl font-bold mb-4">Discover Premium Coffee in the Heart of Jalandhar</h1>
+            <p id="cb-welcome" class="text-white/95 text-base md:text-lg mb-2"></p>
+            <p class="text-white/95 text-base md:text-lg mb-6">Welcome to the best coffee café in Punjab. Whether you need a quick "coffee near me" fix or a relaxing spot, we bring you world-class taste at an affordable café price.</p>
+            <a href="menu.html" class="btn-primary text-white text-lg">Visit Our Café Today</a>
+        </div>
+    </section>
+
+    <!-- FEATURED -->
+    <section class="py-20 max-w-7xl mx-auto px-6">
+        <h2 class="text-4xl font-semibold text-center mb-12 text-[var(--primary)]">Featured Brews</h2>
+        <div class="grid md:grid-cols-3 gap-12">
+            <!-- Card 1 -->
+            <div class="bg-white shadow-lg rounded-xl overflow-hidden">
+                <img src="assets/images/caramel_macchiato.jpg" alt="Caramel Macchiato" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-2xl font-semibold mb-2">Caramel Macchiato</h3>
+                    <p class="text-gray-700 mb-4">Smooth. Sweet. Comfort in a cup.</p>
+                    <button class="add-to-cart btn-primary font-medium" data-id="caramel_macchiato"
+                        data-name="Caramel Macchiato" data-price="210">Add — ₹210</button>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="bg-white shadow-lg rounded-xl overflow-hidden">
+                <img src="assets/images/cold_brew_glass.jpg" alt="Cold Brew" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-2xl font-semibold mb-2">Classic Cold Brew</h3>
+                    <p class="text-gray-700 mb-4">Chilled and bold — perfect for any season.</p>
+                    <button class="add-to-cart btn-primary font-medium" data-id="classic_cold_brew"
+                        data-name="Classic Cold Brew" data-price="180">Add — ₹180</button>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="bg-white shadow-lg rounded-xl overflow-hidden">
+                <img src="assets/images/matcha_latte_cup.jpg" alt="Matcha Latte" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-2xl font-semibold mb-2">Matcha Latte</h3>
+                    <p class="text-gray-700 mb-4">Earthy, creamy, and revitalizing.</p>
+                    <button class="add-to-cart btn-primary font-medium" data-id="matcha_latte" data-name="Matcha Latte"
+                        data-price="190">Add — ₹190</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-semibold text-center mb-12 text-[var(--primary)]">What Our Guests Say</h2>
+            <div class="grid md:grid-cols-3 gap-10">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-[var(--primary)] text-white rounded-full flex items-center justify-center text-xl font-bold">A</div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-semibold">Amanpreet S.</h4>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic leading-relaxed">"The perfect student-friendly environment. I come here to study almost every week. The coffee quality is consistently excellent, and the staff never rushes you."</p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-[var(--primary)] text-white rounded-full flex items-center justify-center text-xl font-bold">P</div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-semibold">Priya M.</h4>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic leading-relaxed">"I'm quite picky about my espresso, but CoffeeBuck always gets it right. Beyond the drinks, it's the cozy atmosphere that keeps me coming back. A true local gem."</p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-[var(--primary)] text-white rounded-full flex items-center justify-center text-xl font-bold">R</div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-semibold">Rahul K.</h4>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic leading-relaxed">"If you're looking for a relaxing café experience, this is the place. The music is just right, the Wi-Fi is fast, and the hazelnut latte is simply unbeatable."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LATEST NEWS & BLOG -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-semibold text-center mb-12 text-[var(--primary)]">Coffee Stories & News</h2>
+            <div class="grid md:grid-cols-3 gap-10">
+                <!-- Blog 1 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+                    <img src="assets/images/cup_latte_art_top_view.jpg" alt="Latte Art" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <p class="text-sm text-[var(--brand)] font-medium mb-2">Wellness</p>
+                        <h3 class="text-xl font-semibold mb-3">The Daily Benefits of Drinking Premium Coffee</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">Discover how a freshly brewed cup of espresso does more than just wake you up. From antioxidants to improved focus, the benefits of quality coffee are endless.</p>
+                        <a href="blog1.html" class="text-[var(--primary)] font-medium hover:underline inline-flex items-center">
+                            Read More
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Blog 2 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+                    <img src="assets/images/cozy_cafe_table_with_book_and_coffee.jpg" alt="Student studying at cafe" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <p class="text-sm text-[var(--brand)] font-medium mb-2">Community</p>
+                        <h3 class="text-xl font-semibold mb-3">Creating the Best Café Experience for Students</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">Finding the right spot to study is crucial. Learn why a warm atmosphere, great Wi-Fi, and a steady supply of caffeine make our café the ultimate student haven in Jalandhar.</p>
+                        <a href="blog2.html" class="text-[var(--primary)] font-medium hover:underline inline-flex items-center">
+                            Read More
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Blog 3 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+                    <img src="assets/images/iced_latte_clear_glass.jpg" alt="Iced Coffee" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <p class="text-sm text-[var(--brand)] font-medium mb-2">Our Menu</p>
+                        <h3 class="text-xl font-semibold mb-3">Refreshing Cold Coffee Drinks for Warm Days</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">From our classic cold brew to the perfectly balanced iced mocha, explore our top recommendations to stay cool and energized in Punjab this season.</p>
+                        <a href="blog3.html" class="text-[var(--primary)] font-medium hover:underline inline-flex items-center">
+                            Read More
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="text-white py-10 text-center">
+        <p class="text-lg mb-3">Coffebuck © 2025</p>
+        <p class="text-sm">Crafted with passion and flavor. Inspired by cafe culture worldwide.</p>
+    </footer>
+
+    <script src="assets/js/auth-client.js"></script>
+    <script src="assets/js/chatbot.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

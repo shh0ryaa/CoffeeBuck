@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coffebuck | Login & Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .auth-container {
+            background: linear-gradient(135deg, rgba(39, 115, 79, 0.05) 0%, rgba(166, 130, 86, 0.05) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .auth-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(59, 43, 32, 0.1);
+            max-width: 500px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .auth-header {
+            background: linear-gradient(135deg, var(--brand) 0%, var(--primary) 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .auth-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .auth-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .auth-body {
+            padding: 40px 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            background: white;
+            border-color: var(--brand);
+            box-shadow: 0 0 0 3px rgba(39, 115, 79, 0.1);
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(39, 115, 79, 0.2);
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(39, 115, 79, 0.3);
+        }
+
+        .form-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c00;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border-left: 4px solid #c00;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+            animation: slideInDown 0.3s ease;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-message {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border-left: 4px solid #2e7d32;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideInDown 0.3s ease;
+        }
+
+        .toggle-section {
+            border-top: 2px solid #f0f0f0;
+            margin-top: 30px;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .toggle-button {
+            background: none;
+            border: none;
+            color: var(--brand);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: underline;
+            padding: 0;
+            margin-left: 4px;
+        }
+
+        .toggle-button:hover {
+            color: var(--brand-dark);
+        }
+
+        .form-hidden {
+            display: none;
+        }
+
+        .tab-indicator {
+            height: 4px;
+            background: var(--brand);
+            width: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+            margin: 0;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .logo-section img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .logo-section span {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--brand);
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .auth-card {
+                border-radius: 16px;
+            }
+
+            .auth-header {
+                padding: 30px 20px;
+            }
+
+            .auth-header h1 {
+                font-size: 24px;
+            }
+
+            .auth-body {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body class="bg-[var(--bg)]">
+
+    <div class="auth-container">
+        <div class="auth-card">
+
+            <!-- Header with Logo -->
+            <div class="auth-header">
+                <div class="logo-section">
+                    <img src="assets/images/coffebuck_logo.png" alt="Coffebuck Logo">
+                    <span>Coffebuck</span>
+                </div>
+                <h1 id="auth-title">Welcome Back</h1>
+                <p id="auth-subtitle">Login to start ordering your favorite brews</p>
+            </div>
+
+            <!-- Body -->
+            <div class="auth-body">
+
+                <!-- Login Form -->
+                <div id="login-form" class="form-section">
+                    <div class="error-message" id="login-error"></div>
+                    <div class="success-message" id="login-success"></div>
+
+                    <form id="login-submit" onsubmit="handleLogin(event)">
+                        <div class="form-group">
+                            <label for="login-email">Email Address</label>
+                            <input type="email" id="login-email" name="email" placeholder="your@email.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" name="password" placeholder="••••••••" required>
+                        </div>
+
+                        <button type="submit" class="form-submit">Login</button>
+                    </form>
+
+                    <div class="toggle-section">
+                        Don't have an account?
+                        <button type="button" class="toggle-button" onclick="switchToSignup()">Sign Up</button>
+                    </div>
+                </div>
+
+                <!-- Signup Form -->
+                <div id="signup-form" class="form-section form-hidden">
+                    <div class="error-message" id="signup-error"></div>
+                    <div class="success-message" id="signup-success"></div>
+
+                    <form id="signup-submit" onsubmit="handleSignup(event)">
+                        <div class="form-group">
+                            <label for="signup-username">Username</label>
+                            <input type="text" id="signup-username" name="username" placeholder="Choose your username"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signup-email">Email Address</label>
+                            <input type="email" id="signup-email" name="email" placeholder="your@email.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signup-password">Password</label>
+                            <input type="password" id="signup-password" name="password"
+                                placeholder="At least 4 characters" required>
+                        </div>
+
+                        <button type="submit" class="form-submit">Create Account</button>
+                    </form>
+
+                    <div class="toggle-section">
+                        Already have an account?
+                        <button type="button" class="toggle-button" onclick="switchToLogin()">Login</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/auth-client.js"></script>
+    <script>
+        // Get URL parameters
+        function getQueryParam(param) {
+            var url = new URL(window.location);
+            return url.searchParams.get(param);
+        }
+
+        // Initialize mode from URL or default to login
+        var initialMode = getQueryParam('mode') || 'login';
+        if (initialMode === 'signup') {
+            switchToSignup();
+        } else {
+            switchToLogin();
+        }
+
+        // Redirect URL (for redirecting after successful auth)
+        var redirectUrl = getQueryParam('redirect') ? decodeURIComponent(getQueryParam('redirect')) : 'index.html';
+
+        // Switch to login mode
+        function switchToLogin() {
+            document.getElementById('login-form').classList.remove('form-hidden');
+            document.getElementById('signup-form').classList.add('form-hidden');
+            document.getElementById('auth-title').innerText = 'Welcome Back';
+            document.getElementById('auth-subtitle').innerText = 'Login to start ordering your favorite brews';
+
+            // Clear errors
+            clearErrors();
+
+            // Update URL without page reload
+            window.history.replaceState({}, document.title, 'auth.html?mode=login');
+        }
+
+        // Switch to signup mode
+        function switchToSignup() {
+            document.getElementById('login-form').classList.add('form-hidden');
+            document.getElementById('signup-form').classList.remove('form-hidden');
+            document.getElementById('auth-title').innerText = 'Join Coffebuck';
+            document.getElementById('auth-subtitle').innerText = 'Create an account to unlock exclusive brews';
+
+            // Clear errors
+            clearErrors();
+
+            // Update URL without page reload
+            window.history.replaceState({}, document.title, 'auth.html?mode=signup');
+        }
+
+        // Clear all error messages
+        function clearErrors() {
+            ['login-error', 'signup-error', 'login-success', 'signup-success'].forEach(function (id) {
+                var el = document.getElementById(id);
+                if (el) {
+                    el.classList.remove('show');
+                    el.innerText = '';
+                }
+            });
+        }
+
+        // Show error message
+        function showError(formType, message) {
+            var errorEl = document.getElementById(formType + '-error');
+            if (errorEl) {
+                errorEl.innerText = message;
+                errorEl.classList.add('show');
+            }
+        }
+
+        // Show success message
+        function showSuccess(formType, message) {
+            var successEl = document.getElementById(formType + '-success');
+            if (successEl) {
+                successEl.innerText = message;
+                successEl.classList.add('show');
+            }
+        }
+
+        // Handle login
+        function handleLogin(e) {
+            e.preventDefault();
+            clearErrors();
+
+            var email = document.getElementById('login-email').value;
+            var password = document.getElementById('login-password').value;
+
+            var btn = document.getElementById('login-submit').querySelector('button');
+            btn.disabled = true;
+            btn.innerText = 'Logging in...';
+
+            window.AuthClient.login({ email: email, password: password })
+                .then(function (user) {
+                    showSuccess('login', 'Login successful! Redirecting...');
+                    setTimeout(function () {
+                        window.location.href = redirectUrl;
+                    }, 500);
+                })
+                .catch(function (err) {
+                    showError('login', err.message || 'Login failed. Please try again.');
+                    btn.disabled = false;
+                    btn.innerText = 'Login';
+                });
+        }
+
+        // Handle signup
+        function handleSignup(e) {
+            e.preventDefault();
+            clearErrors();
+
+            var username = document.getElementById('signup-username').value;
+            var email = document.getElementById('signup-email').value;
+            var password = document.getElementById('signup-password').value;
+
+            var btn = document.getElementById('signup-submit').querySelector('button');
+            btn.disabled = true;
+            btn.innerText = 'Creating account...';
+
+            window.AuthClient.signup({ username: username, email: email, password: password })
+                .then(function (user) {
+                    showSuccess('signup', 'Account created successfully! Redirecting...');
+                    setTimeout(function () {
+                        window.location.href = redirectUrl;
+                    }, 500);
+                })
+                .catch(function (err) {
+                    showError('signup', err.message || 'Signup failed. Please try again.');
+                    btn.disabled = false;
+                    btn.innerText = 'Create Account';
+                });
+        }
+
+        // Optional: Demo users for testing
+        window.addEventListener('load', function () {
+            // Auto-populate demo credentials if needed (for testing)
+            // Uncomment to add demo user on first load
+            /*
+            var users = JSON.parse(localStorage.getItem('coffebuck_users_v1') || '[]');
+            if (users.length === 0) {
+                users.push({
+                    id: 'demo_user_1',
+                    username: 'demo',
+                    email: 'demo@coffebuck.com',
+                    passwordHash: btoa('demo123'),
+                    orders: []
+                });
+                localStorage.setItem('coffebuck_users_v1', JSON.stringify(users));
+            }
+            */
+        });
+    </script>
+
+</body>
+
+</html>

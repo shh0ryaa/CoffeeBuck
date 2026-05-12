@@ -1,0 +1,533 @@
+:root {
+  /* Palette from your image */
+  --brand: #27734F;
+  /* deep green */
+  --brand-dark: #1f5f41;
+  /* hover/active green */
+  --primary: #A68256;
+  /* warm brown */
+  --primary-dark: #8f6238;
+  /* deeper brown */
+  --accent: #D9B991;
+  /* sand */
+  --muted: #D9CBBF;
+  /* cream */
+  --highlight: #A6705D;
+  /* reddish-brown */
+  --text: #3b2b20;
+  /* dark coffee text */
+  --bg: #f6f1ea;
+}
+
+/* Base */
+body {
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Nav */
+.nav-link {
+  color: inherit;
+  transition: color .18s ease, transform .12s ease;
+}
+
+.nav-link:hover {
+  color: var(--brand-dark);
+  transform: translateY(-1px);
+}
+
+.nav-link.active {
+  color: var(--brand);
+  font-weight: 600;
+}
+
+/* Cart badge */
+.cart-badge {
+  background: var(--highlight);
+  color: #fff;
+  padding: .12rem .45rem;
+  border-radius: 999px;
+  font-size: .85rem;
+}
+
+/* Mobile menu animation */
+#mobile-menu.show {
+  display: block;
+}
+
+/* Hero overlay — subtle brown glaze */
+.hero-overlay {
+  background-color: rgba(166, 130, 86, 0.58);
+}
+
+/* Buttons (green CTAs for Starbucks vibe) */
+.btn-primary {
+  background: var(--brand);
+  color: #fff;
+  padding: .75rem 1.15rem;
+  border-radius: .7rem;
+  display: inline-block;
+  transition: background .12s ease, transform .1s ease, box-shadow .2s ease;
+  box-shadow: 0 10px 18px rgba(39, 115, 79, .12);
+}
+
+.btn-primary:hover {
+  background: var(--brand-dark);
+  transform: translateY(-2px);
+}
+
+/* Card hovers */
+.rounded-xl img {
+  transition: transform .35s ease, filter .28s ease;
+}
+
+.rounded-xl:hover img {
+  transform: scale(1.03);
+  filter: contrast(1.02) saturate(1.03);
+}
+
+/* Footer — unified */
+footer {
+  background: var(--brand);
+}
+
+/* Utility shadows */
+.shadow-lg {
+  box-shadow: 0 10px 20px rgba(59, 43, 32, .06);
+}
+
+/* Contact form feedback */
+.form-success {
+  background: var(--accent);
+  padding: 12px;
+  border-radius: 10px;
+  color: var(--text);
+}
+
+/* Cart / table (payment) */
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cart-table th,
+.cart-table td {
+  padding: 12px;
+  text-align: left;
+}
+
+.cart-item-row {
+  border-bottom: 1px solid rgba(0, 0, 0, .06);
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .hero-overlay {
+    padding: 2rem 1rem;
+  }
+
+  .cart-table thead {
+    display: none;
+  }
+
+  .cart-table tr {
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .cart-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+  }
+}
+
+/* Accessibility focus */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 3px solid rgba(39, 115, 79, .22);
+  outline-offset: 3px;
+}
+
+/* Container width normalization */
+.max-w-7xl {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Chatbot widget styles */
+.chat-widget-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background: var(--brand);
+  color: white;
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(39, 115, 79, 0.18);
+  z-index: 9998;
+  cursor: pointer;
+}
+
+.chat-panel {
+  position: fixed;
+  right: 20px;
+  bottom: 88px;
+  width: 360px;
+  max-width: calc(100% - 40px);
+  max-height: 70vh;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 9998;
+  transform-origin: bottom right;
+}
+
+.chat-panel.hidden {
+  display: none;
+}
+
+.chat-header {
+  background: var(--brand);
+  color: white;
+  padding: 12px 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat-messages {
+  padding: 12px;
+  overflow-y: auto;
+  flex: 1 1 auto;
+  background: linear-gradient(180deg, #fff, #fbfaf8);
+}
+
+.chat-input-area {
+  padding: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.chat-input-area textarea {
+  resize: none;
+  flex: 1 1 auto;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  font-family: inherit;
+}
+
+.chat-send-btn {
+  background: var(--brand);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.chat-message {
+  margin-bottom: 10px;
+  display: block;
+}
+
+.chat-message .bubble {
+  display: inline-block;
+  padding: 10px 12px;
+  border-radius: 12px;
+  max-width: 80%;
+}
+
+.chat-message.user {
+  text-align: right;
+}
+
+.chat-message.user .bubble {
+  background: var(--brand);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-message.bot .bubble {
+  background: #f3f1ef;
+  color: var(--text);
+  border-bottom-left-radius: 4px;
+}
+
+.chat-loading {
+  font-size: 12px;
+  color: #777;
+  margin-top: 6px;
+}
+
+@media (max-width: 640px) {
+  .chat-panel {
+    width: 92%;
+    right: 4%;
+    left: 4%;
+    bottom: 84px;
+  }
+
+  .chat-widget-btn {
+    right: 16px;
+    bottom: 16px;
+  }
+}
+
+/* Social media floating bubbles (left side) */
+.social-bubbles {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  z-index: 9998;
+}
+
+.social-bubbles .connector {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  background: linear-gradient(180deg, rgba(39, 115, 79, 0.12), rgba(39, 115, 79, 0.06));
+  border-radius: 4px;
+  top: -120px;
+  bottom: -12px;
+  z-index: -1;
+}
+
+.social-bubbles a {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  box-shadow: 0 8px 18px rgba(59, 43, 32, 0.08);
+  transition: transform .12s ease, box-shadow .12s ease;
+  text-decoration: none;
+}
+
+.social-bubbles a:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(59, 43, 32, 0.12);
+}
+
+.social-bubbles svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 640px) {
+  .social-bubbles {
+    left: 12px;
+    bottom: 12px;
+
+    /* Payment Confirmation Modal */
+    .payment-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      opacity: 0;
+      animation: fadeInOverlay 0.3s ease forwards;
+    }
+
+    @keyframes fadeInOverlay {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .payment-modal {
+      background: white;
+      border-radius: 20px;
+      padding: 40px 30px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+      animation: slideUpModal 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes slideUpModal {
+      from {
+        transform: translateY(40px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .payment-loading-spinner {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 20px;
+      border: 4px solid rgba(39, 115, 79, 0.2);
+      border-top-color: var(--brand);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .payment-success-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      background: linear-gradient(135deg, var(--brand), var(--primary));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: scaleInIcon 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes scaleInIcon {
+      from {
+        transform: scale(0);
+      }
+
+      to {
+        transform: scale(1);
+      }
+    }
+
+    .payment-success-icon svg {
+      width: 40px;
+      height: 40px;
+      stroke: white;
+      fill: none;
+      stroke-width: 2;
+      animation: checkmark 0.6s ease 0.3s both;
+    }
+
+    @keyframes checkmark {
+      0% {
+        stroke-dasharray: 60;
+        stroke-dashoffset: 60;
+      }
+
+      100% {
+        stroke-dasharray: 60;
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .payment-modal h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 20px 0 10px;
+    }
+
+    .payment-modal p {
+      color: #666;
+      line-height: 1.6;
+      margin: 10px 0 20px;
+    }
+
+    .payment-order-number {
+      background: var(--bg);
+      padding: 12px;
+      border-radius: 10px;
+      margin: 15px 0;
+      font-size: 14px;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .payment-button-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .payment-button-group button {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .payment-button-primary {
+      background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+      color: white;
+    }
+
+    .payment-button-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(39, 115, 79, 0.2);
+    }
+
+    .payment-button-secondary {
+      background: transparent;
+      color: var(--brand);
+      border: 2px solid var(--brand);
+    }
+
+    .payment-button-secondary:hover {
+      background: rgba(39, 115, 79, 0.1);
+    }
+
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      pointer-events: none;
+    }
+
+    @media (max-width: 480px) {
+      .payment-modal {
+        padding: 30px 20px;
+      }
+
+      .payment-modal h2 {
+        font-size: 24px;
+      }
+
+      .payment-button-group {
+        flex-direction: column;
+      }
+    }
+  }
+}

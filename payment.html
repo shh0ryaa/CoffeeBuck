@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout | CoffeeBuck</title>
+    <meta name="description" content="Complete your coffee order securely online. Pick up your freshly brewed drinks at our Jalandhar café without the wait." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D7T7GX0GNV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D7T7GX0GNV');
+    </script>
+
+</head>
+
+<body class="bg-[var(--bg)] text-[var(--text)]">
+
+    <header class="fixed top-0 w-full bg-white/95 backdrop-blur shadow z-50">
+        <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+            <div class="flex items-center space-x-4">
+                <img src="assets/images/coffebuck_logo.png" alt="Coffebuck Logo" class="w-12 h-12 object-contain">
+                <span class="text-2xl font-semibold text-[var(--brand)]">Coffebuck</span>
+            </div>
+
+            <ul class="hidden md:flex space-x-8 text-lg">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="menu.html" class="nav-link">Menu</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="store-locator.html" class="nav-link">Store Locator</a></li>
+                <li><a href="payment.html" class="nav-link active">Payment</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+
+            <a href="payment.html" class="hidden md:flex items-center space-x-2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 6h15l-1.5 9h-12L6 6z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <circle cx="10" cy="20" r="1" fill="currentColor" />
+                    <circle cx="18" cy="20" r="1" fill="currentColor" />
+                </svg>
+                <span id="cart-count" class="cart-badge">0</span>
+            </a>
+            <div id="user-area" class="ml-4"></div>
+
+            <button id="nav-toggle" class="md:hidden p-2 rounded-lg" aria-label="Toggle menu">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
+        </nav>
+
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100">
+            <ul class="flex flex-col px-6 py-4 space-y-3">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="menu.html" class="nav-link">Menu</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="store-locator.html" class="nav-link">Store Locator</a></li>
+                <li><a href="payment.html" class="nav-link active">Payment</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- HEADER -->
+    <section class="pt-28 pb-12 text-center" style="background:var(--primary); color:white;">
+        <h1 class="text-5xl font-semibold mb-3">Checkout</h1>
+        <p class="text-lg max-w-2xl mx-auto">Review your order and complete your payment</p>
+    </section>
+
+    <!-- PAYMENT CARD -->
+    <section class="max-w-6xl mx-auto px-6 py-12">
+        <div class="bg-white rounded-2xl shadow-xl p-6 md:p-10 grid md:grid-cols-3 gap-8">
+            <div class="md:col-span-2">
+                <h2 class="text-2xl font-semibold text-[var(--primary)] mb-6">Your Cart</h2>
+                <div id="cart-root"></div>
+                <div class="mt-6"><a href="menu.html" class="btn-primary">Continue Shopping</a></div>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-semibold text-[var(--primary)] mb-6">Payment Details</h2>
+                <div id="payment-summary" class="bg-[var(--bg)] p-6 rounded-xl">
+                    <div class="flex justify-between mb-3 text-lg"><span>Subtotal</span><span id="subtotal">₹
+                            0.00</span></div>
+                    <div class="flex justify-between mb-3 text-lg"><span>Taxes (8%)</span><span id="tax">₹ 0.00</span>
+                    </div>
+                    <hr class="my-3 border-gray-300">
+                    <div class="flex justify-between text-xl font-semibold mb-4"><span>Total</span><span id="total">₹
+                            0.00</span></div>
+                    <button id="pay-button" class="w-full btn-primary py-3 text-lg">Pay Now</button>
+                    <p class="text-sm text-gray-600 text-center mt-4">(Demo payment — no real processing)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-white py-10 text-center">
+        <p class="text-lg mb-3">Coffebuck © 2025</p>
+        <p class="text-sm">Sip slow. Live warm.</p>
+    </footer>
+
+    <!-- Payment Confirmation Modal -->
+    <div id="payment-modal-overlay" class="payment-modal-overlay" style="display:none;">
+        <div class="payment-modal">
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <script src="assets/js/chatbot.js"></script>
+    <script src="assets/js/auth-client.js"></script>
+    <script src="assets/js/main.js"></script>
+    <!-- existing inline script unchanged -->
+    <script>
+        (function () {
+            function fmt(v) { return '₹ ' + v.toFixed(2); }
+            function render() {
+                var root = document.getElementById('cart-root');
+                var s = document.getElementById('subtotal'), t = document.getElementById('tax'), tot = document.getElementById('total');
+                if (!window.CoffeBuck) { return; }
+                var data = window.CoffeBuck.cartTotals();
+                root.innerHTML = '';
+                if (data.cart.length === 0) {
+                    root.innerHTML = '<p class="text-gray-700">Your cart is empty. Add some brews from the menu.</p>';
+                } else {
+                    var table = document.createElement('table'); table.className = 'cart-table w-full';
+                    var thead = document.createElement('thead'); thead.innerHTML = '<tr><th>Item</th><th>Price</th><th>Qty</th><th>Line</th><th></th></tr>';
+                    table.appendChild(thead);
+                    var tbody = document.createElement('tbody');
+                    data.cart.forEach(function (it) {
+                        var tr = document.createElement('tr'); tr.className = 'cart-item-row';
+                        tr.innerHTML = '<td>' + it.name + '</td><td>₹ ' + it.price.toFixed(2) + '</td>' +
+                            '<td><input type="number" min="0" value="' + it.qty + '" data-id="' + it.id + '" class="qty-input px-2 py-1 border rounded w-20"></td>' +
+                            '<td>₹ ' + (it.price * it.qty).toFixed(2) + '</td>' +
+                            '<td><button class="remove-item text-sm px-2 py-1 rounded" data-id="' + it.id + '">Remove</button></td>';
+                        tbody.appendChild(tr);
+                    });
+                    table.appendChild(tbody); root.appendChild(table);
+
+                    root.querySelectorAll('.qty-input').forEach(function (inp) {
+                        inp.addEventListener('change', function () {
+                            var id = inp.getAttribute('data-id'); var qty = parseInt(inp.value) || 0;
+                            window.CoffeBuck.updateQty(id, qty); render();
+                        });
+                    });
+                    root.querySelectorAll('.remove-item').forEach(function (btn) {
+                        btn.addEventListener('click', function () { var id = btn.getAttribute('data-id'); window.CoffeBuck.removeFromCart(id); render(); });
+                    });
+                }
+                s.innerText = fmt(data.subtotal); t.innerText = fmt(data.tax); tot.innerText = fmt(data.total);
+            }
+            document.addEventListener('DOMContentLoaded', function () {
+                render();
+                var pay = document.getElementById('pay-button');
+                if (pay) {
+                    pay.addEventListener('click', function () {
+                        var data = window.CoffeBuck.cartTotals();
+                        if (data.cart.length === 0) { alert('Your cart is empty'); return; }
+                        // require login before payment
+                        var cur = (window.AuthClient && window.AuthClient.getCurrent) ? window.AuthClient.getCurrent() : null;
+                        if (!cur) { var ret = encodeURIComponent(window.location.pathname + window.location.search); window.location.href = 'auth.html?mode=login&redirect=' + ret; return; }
+                        pay.disabled = true; pay.innerText = 'Processing...';
+
+                        // Show a short processing state then redirect to order confirmation page
+                        pay.disabled = true; pay.innerText = 'Processing...';
+
+                        setTimeout(function () {
+                            // Build order and save to user profile
+                            var orderNum = 'ORD-' + Date.now().toString().slice(-8);
+                            var order = {
+                                orderNum: orderNum,
+                                date: new Date().toISOString(),
+                                items: data.cart,
+                                subtotal: data.subtotal,
+                                tax: data.tax,
+                                total: data.total
+                            };
+
+                            // Update user orders in localStorage
+                            var currentUser = window.AuthClient.getCurrent();
+                            if (!currentUser.orders) currentUser.orders = [];
+                            currentUser.orders.push(order);
+
+                            // Save updated user
+                            var allUsers = JSON.parse(localStorage.getItem('coffebuck_users_v1') || '[]');
+                            var userIdx = allUsers.findIndex(function (u) { return u.id === currentUser.id; });
+                            if (userIdx >= 0) {
+                                allUsers[userIdx].orders = currentUser.orders;
+                                localStorage.setItem('coffebuck_users_v1', JSON.stringify(allUsers));
+                                localStorage.setItem('coffebuck_current_user_v1', JSON.stringify(currentUser));
+                            }
+
+                            // Save last order for confirmation page
+                            localStorage.setItem('coffebuck_last_order', JSON.stringify(order));
+
+                            // Clear cart and redirect to confirmation page
+                            window.CoffeBuck.clearCart();
+                            window.location.href = 'order-confirmation.html';
+                        }, 1200);
+
+                    });
+                }
+            });
+        })();
+    </script>
+</body>
+
+</html>

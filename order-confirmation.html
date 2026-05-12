@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Coffebuck | Order Confirmation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif
+        }
+
+        .confirm-panel {
+            max-width: 720px;
+            margin: 72px auto 40px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(59, 43, 32, .08);
+            text-align: center
+        }
+
+        .loader-large {
+            width: 96px;
+            height: 96px;
+            border: 8px solid rgba(39, 115, 79, .12);
+            border-top-color: var(--brand);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 18px auto
+        }
+
+        .success-msg {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--brand);
+            margin-top: 16px
+        }
+
+        .order-summary {
+            margin-top: 18px;
+            text-align: left
+        }
+
+        .order-items {
+            margin-top: 12px
+        }
+    </style>
+</head>
+
+<body class="bg-[var(--bg)] text-[var(--text)]">
+    <header class="fixed top-0 w-full bg-white/95 backdrop-blur shadow z-50">
+        <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+            <div class="flex items-center space-x-4">
+                <img src="assets/images/coffebuck_logo.png" alt="Coffebuck Logo" class="w-12 h-12 object-contain">
+                <span class="text-2xl font-semibold text-[var(--brand)]">Coffebuck</span>
+            </div>
+            <div id="user-area" class="ml-4"></div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="pt-28 px-6">
+            <div class="confirm-panel">
+                <div id="stage-loading">
+                    <div class="loader-large" aria-hidden></div>
+                    <div class="text-gray-700">Processing your order…</div>
+                </div>
+
+                <div id="stage-success" style="display:none">
+                    <div class="payment-success-icon" style="margin:0 auto 10px; width:88px;height:88px;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <div class="success-msg">Successfully ordered</div>
+                    <div id="order-number" style="margin-top:10px;color:#666;font-weight:600"></div>
+                    <div class="order-summary" id="order-summary"></div>
+                    <div style="margin-top:18px;display:flex;gap:12px;justify-content:center">
+                        <a href="profile.html" class="payment-button-primary"
+                            style="padding:10px 18px;border-radius:10px;text-decoration:none;color:#fff">View Order</a>
+                        <a href="index.html" class="payment-button-secondary"
+                            style="padding:10px 18px;border-radius:10px;text-decoration:none;color:var(--brand);border:2px solid var(--brand)">Go
+                            Home</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/js/auth-client.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var last = localStorage.getItem('coffebuck_last_order');
+            if (!last) {
+                // nothing to show, go home
+                setTimeout(function () { window.location.href = 'index.html'; }, 600);
+                return;
+            }
+
+            var order = JSON.parse(last);
+            // show loader for 2s then success
+            setTimeout(function () {
+                document.getElementById('stage-loading').style.display = 'none';
+                var s = document.getElementById('stage-success'); s.style.display = 'block';
+                document.getElementById('order-number').innerText = order.orderNum || ('ORD-' + Date.now().toString().slice(-8));
+
+                var summary = document.getElementById('order-summary');
+                var html = '<div style="font-weight:600;color:var(--text)">Order Summary</div>';
+                html += '<div class="order-items">';
+                if (order.items && order.items.length) {
+                    order.items.forEach(function (it) { html += '<div style="padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04)">' + (it.name || it.id) + ' x' + it.qty + ' <span style="float:right;color:var(--primary)">₹ ' + (it.price * it.qty).toFixed(2) + '</span></div>'; });
+                }
+                html += '</div>';
+                html += '<div style="margin-top:10px;display:flex;justify-content:space-between"><span>Subtotal</span><span>₹ ' + (order.subtotal || 0).toFixed(2) + '</span></div>';
+                html += '<div style="display:flex;justify-content:space-between"><span>Tax</span><span>₹ ' + (order.tax || 0).toFixed(2) + '</span></div>';
+                html += '<div style="margin-top:8px;display:flex;justify-content:space-between;font-weight:700;color:var(--primary)"><span>Total</span><span>₹ ' + (order.total || 0).toFixed(2) + '</span></div>';
+                summary.innerHTML = html;
+
+                // Clear last order after showing
+                localStorage.removeItem('coffebuck_last_order');
+
+                // After a short pause, redirect to home
+                setTimeout(function () { window.location.href = 'index.html'; }, 3000);
+            }, 2000);
+        });
+    </script>
+</body>
+
+</html>
